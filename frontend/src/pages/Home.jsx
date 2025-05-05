@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Monitor, Globe, Football } from "lucide-react";
+import { Monitor, Globe, Gamepad2 } from "lucide-react";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ export default function Home() {
     {
       nombre: "Deportes",
       descripcion: "Pon a prueba tus conocimientos deportivos.",
-      icono: <Football className="w-12 h-12 mb-4 text-green-600" />,
+      icono: <Gamepad2 className="w-12 h-12 mb-4 text-green-600" />,
       ruta: "/deportes",
     },
     {
