@@ -1,5 +1,3 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Monitor, Globe, Football } from "lucide-react";
@@ -42,17 +40,23 @@ export default function Home() {
       </p>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
         {categorias.map((cat, index) => (
-          <motion.div key={index} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
-            <Card className="p-6 text-center shadow-xl rounded-2xl bg-white hover:shadow-2xl transition duration-300 border border-gray-200">
-              <CardContent className="flex flex-col items-center">
-                {cat.icono}
-                <h2 className="text-xl font-semibold mb-2 text-gray-700">{cat.nombre}</h2>
-                <p className="text-gray-500 mb-4 text-sm">{cat.descripcion}</p>
-                <Button onClick={() => navigate(cat.ruta)} className="bg-indigo-500 hover:bg-indigo-600 text-white">
-                  Ir a {cat.nombre}
-                </Button>
-              </CardContent>
-            </Card>
+          <motion.div
+            key={index}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
+            className="bg-white rounded-2xl p-6 text-center shadow-lg border border-gray-200"
+          >
+            <div className="flex flex-col items-center">
+              {cat.icono}
+              <h2 className="text-xl font-semibold mb-2 text-gray-700">{cat.nombre}</h2>
+              <p className="text-gray-500 mb-4 text-sm">{cat.descripcion}</p>
+              <button
+                onClick={() => navigate(cat.ruta)}
+                className="bg-indigo-500 text-white px-4 py-2 rounded hover:bg-indigo-600 transition"
+              >
+                Ir a {cat.nombre}
+              </button>
+            </div>
           </motion.div>
         ))}
       </div>
