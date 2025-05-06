@@ -1,0 +1,42 @@
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  padding: 20px;
+  margin: 0;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2rem;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 10px 5px;
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+button:hover {
+  background: #2980b9;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+
+  button {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+}

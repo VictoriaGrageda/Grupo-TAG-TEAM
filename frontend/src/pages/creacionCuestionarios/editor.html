@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Editor de Cuestionarios Interactivos</title>
+  <link rel="stylesheet" href="css/style-base.css"/>
+  <link rel="stylesheet" href="css/style-editor.css"/>
+</head>
+<body>
+  <h1> Creador de Cuestionarios Interactivos</h1>
+
+  <section>
+    <label>Nombre del cuestionario:</label>
+    <input type="text" id="nombreGrupo" placeholder="Dale un título atractivo">
+  </section>
+
+  <div id="contenedor-preguntas"></div>
+
+  <button onclick="agregarPregunta()">Crear nueva pregunta</button>
+  <button onclick="guardarTrabajo()">Guardar trabajo</button>
+  <button onclick="exportarPDF()">Exportar a PDF</button>
+  <button onclick="copiarEnlace()">Compartir enlace</button>
+  <button id="btn-preview" onclick="location.href='vista-previa.html'" disabled>Vista Previa</button>
+
+  <script src="js/editor-preguntas.js"></script>
+  <script src="js/funcionalidades-extra.js"></script>
+</body>
+</html>
