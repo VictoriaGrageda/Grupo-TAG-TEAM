@@ -1,10 +1,34 @@
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import ModalDificultad from "./ModalDificultad";
+
 export default function Aleatorio() {
+  const [mostrarModal, setMostrarModal] = useState(true);
+  const [dificultad, setDificultad] = useState(null);
+  const navigate = useNavigate();
+
+  const manejarSeleccion = (nivel) => {
+    setDificultad(nivel);
+    setMostrarModal(false);
+  };
+
+  const manejarCancelar = () => {
+    navigate("/");
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-100 to-pink-100 p-10 flex flex-col items-center justify-center text-center">
-      <h1 className="text-4xl font-bold text-pink-700 mb-4">Categoría: Aleatorio</h1>
-      <p className="text-gray-600 text-lg max-w-xl">
-        ¡Atrévete a responder preguntas sorpresa de todas las categorías! Ideal para jugar y desafiar tu memoria. 🎲🤓
-      </p>
+    <div className="min-h-screen bg-gradient-to-br from-yellow-100 to-yellow-300 p-10 flex flex-col items-center justify-center text-center">
+      {mostrarModal && (
+        <ModalDificultad onSelect={manejarSeleccion} onClose={manejarCancelar} />
+      )}
+      {!mostrarModal && (
+        <>
+          <h1 className="text-4xl font-bold text-yellow-700 mb-4">Categoría: Aleatorio</h1>
+          <p className="text-gray-700 text-lg max-w-xl">
+            Dificultad seleccionada: <strong>{dificultad}</strong>
+          </p>
+        </>
+      )}
     </div>
   );
 }
