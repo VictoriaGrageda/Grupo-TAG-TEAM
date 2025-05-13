@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import ModalDificultad from "./ModalDificultad";
+import ModalDificultad from "../assets/ModalDificultad";
+
 
 export default function Geografia() {
   const [mostrarModal, setMostrarModal] = useState(true);
   const [dificultad, setDificultad] = useState(null);
-  const navigate = useNavigate(); // 👈 Importante
+  const navigate = useNavigate(); //  Importante
 
   const manejarSeleccion = (nivel) => {
     setDificultad(nivel);
@@ -13,7 +14,7 @@ export default function Geografia() {
   };
 
   const manejarCancelar = () => {
-    navigate("/"); // 👈 Redirige al home
+    navigate("/"); //  Redirige al home
   };
 
   return (
@@ -21,7 +22,7 @@ export default function Geografia() {
       {mostrarModal && (
         <ModalDificultad
           onSelect={manejarSeleccion}
-          onClose={manejarCancelar} // 👈 Aquí está el cambio
+          onClose={manejarCancelar} //  Aquí está el cambio
         />
       )}
       {!mostrarModal && (
