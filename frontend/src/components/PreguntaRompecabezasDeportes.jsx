@@ -53,7 +53,7 @@ export default function PreguntaRompecabezasDeportes({ nivel }) {
 
     if (esCorrecto) {
       if (indiceActual + 1 < preguntas.length) {
-        setMensaje("✅ ¡Correcto! Avanzando...");
+        setMensaje(" ¡Correcto! Avanzando...");
         setTimeout(() => {
           const siguiente = indiceActual + 1;
           setIndiceActual(siguiente);
@@ -65,7 +65,7 @@ export default function PreguntaRompecabezasDeportes({ nivel }) {
         setTerminado(true);
       }
     } else {
-      setMensaje("❌ Intenta de nuevo");
+      setMensaje(" Intenta de nuevo");
     }
   };
 
@@ -76,7 +76,7 @@ export default function PreguntaRompecabezasDeportes({ nivel }) {
       <div className="card w-full max-w-3xl p-6 rounded-xl bg-white shadow-2xl">
         <p className="text-gray-500 mb-1 text-sm text-center">Pregunta {indiceActual + 1} de {preguntas.length}</p>
         <h2 className="text-xl font-bold mb-6 flex justify-center items-center gap-2 text-center">
-          🧩 {preguntas[indiceActual].enunciado}
+           {preguntas[indiceActual].enunciado}
         </h2>
 
         <ul className="flex flex-col items-center gap-3 mb-6">
@@ -103,7 +103,7 @@ export default function PreguntaRompecabezasDeportes({ nivel }) {
               onClick={verificar}
               className="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-full font-semibold shadow-md"
             >
-              ✅ Verificar pedido
+               Verificar pedido
             </button>
           </div>
         )}
@@ -112,7 +112,7 @@ export default function PreguntaRompecabezasDeportes({ nivel }) {
           <div className="mt-4 text-lg text-center font-semibold">
             {mensaje.includes("🎉") ? (
               <span className="text-purple-600">{mensaje}</span>
-            ) : mensaje.includes("✅") ? (
+            ) : mensaje.includes("") ? (
               <span className="text-green-600">{mensaje}</span>
             ) : (
               <span className="text-red-600">{mensaje}</span>
@@ -127,7 +127,7 @@ export default function PreguntaRompecabezasDeportes({ nivel }) {
               onClick={() => window.location.reload()}
               className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded shadow"
             >
-              🔁 Volver a jugar
+               Volver a jugar
             </button>
           </div>
         )}
