@@ -61,7 +61,7 @@ export default function PreguntaRompecabezasDeportes({ nivel }) {
           setMensaje(null);
         }, 1000);
       } else {
-        setMensaje("🎉 ¡Has completado todos los rompecabezas!");
+        setMensaje(" ¡Has completado todos los rompecabezas!");
         setTerminado(true);
       }
     } else {
