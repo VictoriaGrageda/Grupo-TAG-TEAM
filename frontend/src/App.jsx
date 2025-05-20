@@ -4,6 +4,7 @@ import Geografia from './pages/Geografia';
 import Deportes from './pages/Deportes';
 import Tecnologia from './pages/Tecnologia';
 import Aleatorio from './pages/Aleatorio';
+import './App.css';
 
 function App() {
   return (
