@@ -1,36 +1,59 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ModalDificultad from "../assets/ModalDificultad";
-
+import PreguntaArrastrar from "./geografia/preguntas/PreguntaArrastrar";
+import PreguntaRompecabezasFrancia from "./geografia/preguntas/PreguntaRompecabezasFrancia";
+import PreguntaOrdenarPlanetas from "./geografia/preguntas/PreguntaOrdenarPlanetas";
+import "./geografia/preguntas/geografia.css";
 
 export default function Geografia() {
   const [mostrarModal, setMostrarModal] = useState(true);
   const [dificultad, setDificultad] = useState(null);
-  const navigate = useNavigate(); //  Importante
+  const [preguntaActual, setPreguntaActual] = useState(0);
+  const navigate = useNavigate();
 
   const manejarSeleccion = (nivel) => {
     setDificultad(nivel);
     setMostrarModal(false);
+    setPreguntaActual(0);
   };
 
   const manejarCancelar = () => {
-    navigate("/"); //  Redirige al home
+    navigate("/");
+  };
+
+  const preguntasPorNivel = {
+    Fácil: [<PreguntaArrastrar />],
+    Intermedio: [<PreguntaOrdenarPlanetas />],
+    Difícil: [<PreguntaRompecabezasFrancia />],
+  };
+
+  const preguntas = dificultad ? preguntasPorNivel[dificultad] || [] : [];
+
+  const siguientePregunta = () => {
+    if (preguntaActual < preguntas.length - 1) {
+      setPreguntaActual(preguntaActual + 1);
+    } else {
+      alert("¡Has completado todas las preguntas de nivel " + dificultad + "!");
+    }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-100 to-blue-300 p-10 flex flex-col items-center justify-center text-center">
-      {mostrarModal && (
-        <ModalDificultad
-          onSelect={manejarSeleccion}
-          onClose={manejarCancelar} //  Aquí está el cambio
-        />
-      )}
-      {!mostrarModal && (
+    <div className="geografia-container">
+      {mostrarModal ? (
+        <ModalDificultad onSelect={manejarSeleccion} onClose={manejarCancelar} />
+      ) : (
         <>
-          <h1 className="text-4xl font-bold text-blue-700 mb-4">Categoría: Geografía</h1>
-          <p className="text-gray-700 text-lg max-w-xl">
+          <h1 className="geografia-titulo">Categoría: Geografía</h1>
+          <p className="geografia-subtitulo">
             Dificultad seleccionada: <strong>{dificultad}</strong>
           </p>
+          <div className="pregunta-box">{preguntas[preguntaActual]}</div>
+          {preguntas.length > 1 && (
+            <button className="btn-siguiente" onClick={siguientePregunta}>
+              Siguiente
+            </button>
+          )}
         </>
       )}
     </div>
