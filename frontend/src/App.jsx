@@ -5,8 +5,10 @@ import Deportes from './pages/Deportes';
 import Tecnologia from './pages/Tecnologia';
 import Aleatorio from './pages/Aleatorio';
 
-import EditorCuestionario from './pages/creacionDeCuestionarios/EditorCuestionario';
-import VistaCuestionario from './pages/creacionDeCuestionarios/VistaCuestionario';
+
+import EditorCuestionario from './pages/creacionCuestionarios/EditorCuestionario';
+import VistaCuestionario from './pages/creacionCuestionarios/VistaCuestionario';
+
 
 import './App.css';
 import './index.css';
