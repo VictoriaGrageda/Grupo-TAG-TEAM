@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Monitor, Globe, Gamepad2 } from "lucide-react";
+import '../index.css';
 
 export default function Home() {
   const navigate = useNavigate();
@@ -57,6 +58,16 @@ export default function Home() {
           </div>
         ))}
       </div>
+
+      <div style={{ textAlign: "center", marginTop: "3rem" }}>
+        <button
+          className="card-button"
+          onClick={() => navigate("/editor")}
+        >
+          Crear Cuestionario
+        </button>
+      </div>
+
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ModalDificultad from "../assets/ModalDificultad";
-import PreguntaRompecabezasDeportes from "../components/PreguntaRompecabezasDeportes"; // Ajusta la ruta según tu estructura
+
 
 export default function Deportes() {
   const [mostrarModal, setMostrarModal] = useState(true);
