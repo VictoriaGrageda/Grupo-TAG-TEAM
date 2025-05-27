@@ -23,7 +23,7 @@ function App() {
         <Route path="/aleatorio" element={<Aleatorio />} />
 
         <Route path="/editor" element={<EditorCuestionario />} />
-        <Route path="/cuestionario" element={<VistaCuestionario />} />
+        <Route path="/cuestionario" element={<VistaCuestionario />} />  
 
       </Routes>
     </Router>
