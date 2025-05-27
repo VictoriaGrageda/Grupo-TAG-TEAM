@@ -139,3 +139,14 @@ button:hover {
   }
 }
 
+.descripcion-pregunta {
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: 16px;
+  line-height: 1.5;
+  padding: 10px;
+  background-color: #ffffffcc;
+  border-radius: 8px;
+  text-align: justify;
+}
+

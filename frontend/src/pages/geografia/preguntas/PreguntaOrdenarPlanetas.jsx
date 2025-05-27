@@ -66,6 +66,10 @@ export default function PuzzlePlanetas() {
     <div className="contenedor-planetas">
       <h1>Ordena los planetas del sistema solar</h1>
 
+      <p className="descripcion-pregunta">
+        En esta actividad interactiva deberás arrastrar y ordenar los planetas del sistema solar según su distancia al Sol, comenzando por el más cercano y terminando por el más lejano. Utiliza las imágenes como guía para identificar cada planeta. Esta dinámica te ayudará a reforzar tus conocimientos sobre el orden real de los planetas en el sistema solar. Recuerda que deben estar todos colocados para poder verificar tu respuesta.
+      </p>
+
       <div
         className="zona-drop"
         onDragOver={(e) => e.preventDefault()}
