@@ -2,7 +2,7 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #ffffff;
+  background-color: #ffffff; /* Fondo blanco plano */
   color: #1f2937;
   min-height: 100vh;
 }

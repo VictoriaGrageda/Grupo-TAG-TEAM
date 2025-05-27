@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ModalDificultad from "../assets/ModalDificultad";
 
+
 export default function Deportes() {
   const [mostrarModal, setMostrarModal] = useState(true);
   const [dificultad, setDificultad] = useState(null);
@@ -21,12 +22,16 @@ export default function Deportes() {
       {mostrarModal && (
         <ModalDificultad onSelect={manejarSeleccion} onClose={manejarCancelar} />
       )}
+
       {!mostrarModal && (
         <>
           <h1 className="text-4xl font-bold text-green-700 mb-4">Categoría: Deportes</h1>
-          <p className="text-gray-700 text-lg max-w-xl">
+          <p className="text-gray-700 text-lg max-w-xl mb-6">
             Dificultad seleccionada: <strong>{dificultad}</strong>
           </p>
+
+          {dificultad && <PreguntaRompecabezasDeportes nivel={dificultad} />}
+
         </>
       )}
     </div>

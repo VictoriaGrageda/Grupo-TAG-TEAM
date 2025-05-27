@@ -4,9 +4,8 @@ import ModalDificultad from "../assets/ModalDificultad";
 import TecFacil from "./tecnologia/preguntas/TecFacil";
 import TecIntermedio from "./tecnologia/preguntas/TecIntermedio";
 import TecDificil from "./tecnologia/preguntas/TecDificil";
-
-
 import "../assets/tecnologia.css"; 
+
 
 export default function Tecnologia() {
   const [mostrarModal, setMostrarModal] = useState(true);

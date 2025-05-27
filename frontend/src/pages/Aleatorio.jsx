@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ModalDificultad from "../assets/ModalDificultad";
 
+
 export default function Aleatorio() {
   const [mostrarModal, setMostrarModal] = useState(true);
   const [dificultad, setDificultad] = useState(null);

@@ -1,5 +1,6 @@
 /* === Estilos para Home.jsx === */
 .home-container {
+  width: 100vw;
   min-height: 100vh;
   padding: 40px 20px;
   display: flex;
@@ -7,6 +8,7 @@
   align-items: center;
   background: linear-gradient(to bottom, #dbeafe, #ffffff, #dbeafe);
   font-family: Arial, sans-serif;
+  box-sizing: border-box;
 }
 
 .home-title {
