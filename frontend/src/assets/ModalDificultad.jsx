@@ -1,5 +1,5 @@
 import React from "react";
-import "./modal.css";
+import "../assets/modal.css";
 
 export default function ModalDificultad({ onSelect, onClose }) {
   return (
