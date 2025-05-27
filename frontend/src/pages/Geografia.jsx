@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ModalDificultad from "../assets/ModalDificultad";
-import PreguntaArrastrar from "./geografia/preguntas/PreguntaArrastrar";
-import PreguntaRompecabezasFrancia from "./geografia/preguntas/PreguntaRompecabezasFrancia";
 import PreguntaOrdenarPlanetas from "./geografia/preguntas/PreguntaOrdenarPlanetas";
 import "./geografia/preguntas/geografia.css";
 
@@ -23,9 +21,9 @@ export default function Geografia() {
   };
 
   const preguntasPorNivel = {
-    Fácil: [<PreguntaArrastrar />],
+    Fácil: [<PreguntaOrdenarPlanetas />],
     Intermedio: [<PreguntaOrdenarPlanetas />],
-    Difícil: [<PreguntaRompecabezasFrancia />],
+    Difícil: [<PreguntaOrdenarPlanetas />],
   };
 
   const preguntas = dificultad ? preguntasPorNivel[dificultad] || [] : [];
