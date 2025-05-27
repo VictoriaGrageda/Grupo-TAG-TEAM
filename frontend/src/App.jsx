@@ -6,6 +6,7 @@ import Geografia from "./pages/Geografia";
 import Deportes from "./pages/Deportes";
 import Tecnologia from "./pages/Tecnologia";
 import Aleatorio from "./pages/Aleatorio";
+import EditorCuestionario from "./pages/creacionCuestionarios/EditorCuestionario";
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
         <Route path="/deportes" element={<Deportes />} />
         <Route path="/tecnologia" element={<Tecnologia />} />
         <Route path="/aleatorio" element={<Aleatorio />} />
+        <Route path="/editor" element={<EditorCuestionario />} />
       </Routes>
     </Router>
   );
