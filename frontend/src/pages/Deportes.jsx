@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import ModalDificultad from "./ModalDificultad";
+import ModalDificultad from "../assets/ModalDificultad";
 
 export default function Deportes() {
   const [mostrarModal, setMostrarModal] = useState(true);
