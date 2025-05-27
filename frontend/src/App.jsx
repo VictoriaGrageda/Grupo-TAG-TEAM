@@ -26,6 +26,8 @@ function App() {
         <Route path="/tecnologia" element={<Tecnologia />} />
         <Route path="/aleatorio" element={<Aleatorio />} />
         <Route path="/editor" element={<EditorCuestionario />} />
+        <Route path="/cuestionario" element={<VistaCuestionario />} />  
+
       </Routes>
     </Router>
   );
