@@ -5,6 +5,8 @@ const EditorCuestionario = () => {
   const [preguntas, setPreguntas] = useState([]);
   const [nombreGrupo, setNombreGrupo] = useState("");
   const [vistaActiva, setVistaActiva] = useState(false);
+  const [categoria, setCategoria] = useState("");
+
 
   const agregarPregunta = () => {
     setPreguntas((prev) => [
@@ -57,6 +59,7 @@ const EditorCuestionario = () => {
         correcto: p.respuesta.includes(e.id.toString()),
       })),
       grupo: nombreGrupo,
+      categoria: categoria,
     }));
     localStorage.setItem("cuestionarioCompleto", JSON.stringify(cuestionarioFinal));
     alert("Trabajo guardado correctamente");
@@ -74,6 +77,19 @@ const EditorCuestionario = () => {
           value={nombreGrupo}
           onChange={(e) => setNombreGrupo(e.target.value)}
         />
+
+        <label>Categoría del cuestionario:</label>
+        <select
+          value={categoria}
+          onChange={(e) => setCategoria(e.target.value)}
+        >
+          <option value="">Selecciona una categoría</option>
+          <option value="geografia">Geografía</option>
+          <option value="deportes">Deportes</option>
+          <option value="tecnologia">Tecnología</option>
+          <option value="otros">Otros</option>
+        </select>
+
       </section>
 
       {preguntas.map((preg, i) => (
