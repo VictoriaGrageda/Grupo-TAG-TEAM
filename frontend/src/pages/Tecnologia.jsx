@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ModalDificultad from "../assets/ModalDificultad";
+import TecFacil from "./tecnologia/preguntas/TecFacil";
+import TecIntermedio from "./tecnologia/preguntas/TecIntermedio";
+import TecDificil from "./tecnologia/preguntas/TecDificil";
+import "../assets/tecnologia.css"; 
 
 
 export default function Tecnologia() {
@@ -14,22 +18,37 @@ export default function Tecnologia() {
   };
 
   const manejarCancelar = () => {
-    navigate("/");
+    navigate("/home");
+  };
+
+  const renderizarPregunta = () => {
+    if (dificultad === "Fácil") return <TecFacil />;
+    if (dificultad === "Intermedio") return <TecIntermedio />;
+    if (dificultad === "Difícil") return <TecDificil />;
+    return null;
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-100 to-indigo-300 p-10 flex flex-col items-center justify-center text-center">
+    <div className="tecnologia-container">
       {mostrarModal && (
         <ModalDificultad onSelect={manejarSeleccion} onClose={manejarCancelar} />
       )}
+
       {!mostrarModal && (
         <>
-          <h1 className="text-4xl font-bold text-indigo-700 mb-4">Categoría: Tecnología</h1>
-          <p className="text-gray-700 text-lg max-w-xl">
+          <button className="btn-regresar" onClick={() => navigate("/home")}>
+            ⬅ Volver
+          </button>
+
+          <h1 className="tecnologia-titulo">Categoría: Tecnología</h1>
+          <p className="tecnologia-subtitulo">
             Dificultad seleccionada: <strong>{dificultad}</strong>
           </p>
+
+          {renderizarPregunta()}
         </>
       )}
     </div>
   );
 }
+
