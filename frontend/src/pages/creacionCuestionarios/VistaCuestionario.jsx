@@ -16,43 +16,45 @@ const VistaCuestionario = () => {
       const textos = Array.from(items).map((p) => p.textContent);
       const correctos = preg.elementos.filter((e) => e.correcto).map((e) => e.texto);
 
-      const esCorrecto = textos.length === correctos.length &&
+      const esCorrecto =
+        textos.length === correctos.length &&
         textos.every((t, i) => t === correctos[i]);
 
       document.getElementById("resultado-" + idx).textContent = esCorrecto
-        ? "✅ Correcto"
-        : "❌ Incorrecto";
+        ? " Correcto"
+        : " Incorrecto";
     });
   };
 
   const exportarPDF = () => {
     if (!preguntas.length) return alert("No hay preguntas para exportar.");
-    const ventana = window.open('', '_blank');
-    ventana.document.write('<html><head><title>Cuestionario PDF</title><style>');
-    ventana.document.write('body { font-family: Arial; padding: 20px; }');
-    ventana.document.write('.tarjeta { border: 2px solid #333; padding: 15px; border-radius: 10px; margin-bottom: 20px; }');
-    ventana.document.write('.tarjeta img { max-width: 200px; display: block; margin-bottom: 10px; }');
-    ventana.document.write('</style></head><body>');
+    const ventana = window.open("", "_blank");
+    ventana.document.write("<html><head><title>Cuestionario PDF</title><style>");
+    ventana.document.write("body { font-family: Arial; padding: 20px; }");
+    ventana.document.write(".tarjeta { border: 2px solid #333; padding: 15px; border-radius: 10px; margin-bottom: 20px; }");
+    ventana.document.write(".tarjeta img { max-width: 200px; display: block; margin-bottom: 10px; }");
+    ventana.document.write("</style></head><body>");
 
     preguntas.forEach((preg, i) => {
-      ventana.document.write('<div class="tarjeta">');
-      ventana.document.write('<h3>Pregunta ' + (i + 1) + '</h3>');
-      if (preg.imagenEnunciado) ventana.document.write('<img src="' + preg.imagenEnunciado + '"/>');
-      ventana.document.write('<p><strong>' + preg.titulo + '</strong></p>');
-      ventana.document.write('<p><em>Dificultad: ' + preg.dificultad + '</em></p>');
-      ventana.document.write('<ul>');
-      preg.elementos.forEach(e => ventana.document.write('<li>' + e.texto + '</li>'));
-      ventana.document.write('</ul></div>');
+      ventana.document.write("<div class='tarjeta'>");
+      ventana.document.write("<h3>Pregunta " + (i + 1) + "</h3>");
+      if (preg.imagenEnunciado) ventana.document.write("<img src='" + preg.imagenEnunciado + "'/>");
+      ventana.document.write("<p><strong>" + preg.titulo + "</strong></p>");
+      if (preg.descripcion) ventana.document.write("<p><em>" + preg.descripcion + "</em></p>");
+      ventana.document.write("<p><em>Dificultad: " + preg.dificultad + "</em></p>");
+      ventana.document.write("<ul>");
+      preg.elementos.forEach((e) => ventana.document.write("<li>" + e.texto + "</li>"));
+      ventana.document.write("</ul></div>");
     });
 
-    ventana.document.write('</body></html>');
+    ventana.document.write("</body></html>");
     ventana.document.close();
     ventana.print();
   };
 
   const copiarEnlace = () => {
-    const encoded = encodeURIComponent(localStorage.getItem('cuestionarioCompleto') || '');
-    const enlace = location.origin + location.pathname + '?q=' + encoded;
+    const encoded = encodeURIComponent(localStorage.getItem("cuestionarioCompleto") || "");
+    const enlace = location.origin + location.pathname + "?q=" + encoded;
     navigator.clipboard.writeText(enlace);
     alert("Enlace copiado al portapapeles");
   };
@@ -63,8 +65,11 @@ const VistaCuestionario = () => {
       {preguntas.map((preg, idx) => (
         <div key={idx} className="pregunta-block">
           <h3>Pregunta {idx + 1}</h3>
-          {preg.imagenEnunciado && <img src={preg.imagenEnunciado} alt="" style={{ maxWidth: "300px" }} />}
-          <p>{preg.titulo}</p>
+          {preg.imagenEnunciado && (
+            <img src={preg.imagenEnunciado} alt="" style={{ maxWidth: "300px" }} />
+          )}
+          <p><strong>{preg.titulo}</strong></p>
+          {preg.descripcion && <p style={{ fontStyle: "italic", color: "#555" }}>{preg.descripcion}</p>}
 
           <div id={`opciones-${idx}`} className="dropzone">
             {[...preg.elementos].sort(() => Math.random() - 0.5).map((e, i) => (
@@ -105,4 +110,3 @@ const VistaCuestionario = () => {
 };
 
 export default VistaCuestionario;
-

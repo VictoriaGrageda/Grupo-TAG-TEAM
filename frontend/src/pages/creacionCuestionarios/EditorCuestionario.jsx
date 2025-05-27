@@ -1,7 +1,6 @@
 import React, { useState, useref } from "react";
 import "./editorCuestionarioEstilo.css";
 
-
 const EditorCuestionario = () => {
   const [preguntas, setPreguntas] = useState([]);
   const [nombreGrupo, setNombreGrupo] = useState("");
@@ -12,6 +11,7 @@ const EditorCuestionario = () => {
       ...prev,
       {
         titulo: "",
+        descripcion: "",
         dificultad: "facil",
         imagenEnunciado: "",
         elementos: [],
@@ -88,6 +88,19 @@ const EditorCuestionario = () => {
               copia[i].titulo = e.target.value;
               setPreguntas(copia);
             }}
+          />
+
+          <label>Descripción:</label>
+          <textarea
+            placeholder="Descripción opcional de la pregunta"
+            value={preg.descripcion}
+            onChange={(e) => {
+              const copia = [...preguntas];
+              copia[i].descripcion = e.target.value;
+              setPreguntas(copia);
+            }}
+            rows={3}
+            style={{ width: "100%", marginTop: "10px", padding: "10px", borderRadius: "6px", border: "1px solid #ccc" }}
           />
 
           <label>Imagen del enunciado:</label>
@@ -193,7 +206,7 @@ const EditorCuestionario = () => {
 
       <button onClick={agregarPregunta}>Crear nueva pregunta</button>
       <button onClick={guardarTrabajo}>Guardar trabajo</button>
-      <button disabled={!vistaActiva} onClick={() => window.location.href = "/vista"}>
+      <button disabled={!vistaActiva} onClick={() => window.location.href = "/cuestionario"}>
         Vista previa
       </button>
     </div>

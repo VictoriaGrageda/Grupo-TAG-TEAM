@@ -60,3 +60,13 @@ button:hover {
   height: auto;
   border-radius: 5px;
 }
+
+.descripcion-pregunta {
+  font-style: italic;
+  color: #555;
+  background-color: #fdfdfd;
+  padding: 8px;
+  border-left: 4px solid #9b59b6;
+  margin-top: 5px;
+  border-radius: 4px;
+}
