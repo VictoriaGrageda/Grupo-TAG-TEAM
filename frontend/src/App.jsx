@@ -6,9 +6,15 @@ import Geografia from "./pages/Geografia";
 import Deportes from "./pages/Deportes";
 import Tecnologia from "./pages/Tecnologia";
 import Aleatorio from "./pages/Aleatorio";
-import EditorCuestionario from "./pages/creacionCuestionarios/EditorCuestionario";
 
-export default function App() {
+import EditorCuestionario from './pages/creacionCuestionarios/EditorCuestionario';
+import VistaCuestionario from './pages/creacionCuestionarios/VistaCuestionario';
+
+import './App.css';
+import './index.css';
+
+function App() {
+
   return (
     <Router>
       <Routes>
@@ -24,4 +30,6 @@ export default function App() {
     </Router>
   );
 }
+export default App;
+
 
