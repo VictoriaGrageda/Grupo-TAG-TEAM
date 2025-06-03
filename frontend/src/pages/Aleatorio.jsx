@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ModalDificultad from "../assets/ModalDificultad";
-
+import "../assets/aleatorio.css";
 
 export default function Aleatorio() {
   const [mostrarModal, setMostrarModal] = useState(true);
@@ -14,7 +14,7 @@ export default function Aleatorio() {
   };
 
   const manejarCancelar = () => {
-    navigate("/");
+    navigate("/home");
   };
 
   return (
