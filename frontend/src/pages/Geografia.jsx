@@ -17,7 +17,7 @@ export default function Geografia() {
   };
 
   const manejarCancelar = () => {
-    navigate("/");
+    navigate("/home");
   };
 
   const preguntasPorNivel = {
@@ -42,6 +42,7 @@ export default function Geografia() {
         <ModalDificultad onSelect={manejarSeleccion} onClose={manejarCancelar} />
       ) : (
         <>
+          <button className="btn-regresar" onClick={manejarCancelar}>⬅</button>
           <h1 className="geografia-titulo">Categoría: Geografía</h1>
           <p className="geografia-subtitulo">
             Dificultad seleccionada: <strong>{dificultad}</strong>
