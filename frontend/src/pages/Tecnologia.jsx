@@ -37,7 +37,7 @@ export default function Tecnologia() {
       {!mostrarModal && (
         <>
           <button className="btn-regresar" onClick={() => navigate("/home")}>
-            ⬅ Volver
+            ⬅ 
           </button>
 
           <h1 className="tecnologia-titulo">Categoría: Tecnología</h1>
