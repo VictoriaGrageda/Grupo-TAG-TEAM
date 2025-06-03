@@ -1,4 +1,5 @@
-import React, { useState, useref } from "react";
+
+import React, { useState } from "react";
 import "./editorCuestionarioEstilo.css";
 
 const EditorCuestionario = () => {
@@ -6,7 +7,6 @@ const EditorCuestionario = () => {
   const [nombreGrupo, setNombreGrupo] = useState("");
   const [vistaActiva, setVistaActiva] = useState(false);
   const [categoria, setCategoria] = useState("");
-
 
   const agregarPregunta = () => {
     setPreguntas((prev) => [
@@ -17,7 +17,7 @@ const EditorCuestionario = () => {
         dificultad: "facil",
         imagenEnunciado: "",
         elementos: [],
-        respuesta: [],
+        respuestas: [[]], // una o más zonas de respuesta
       },
     ]);
   };
@@ -32,22 +32,34 @@ const EditorCuestionario = () => {
     setPreguntas(copia);
   };
 
+  const agregarZonaRespuesta = (index) => {
+    const copia = [...preguntas];
+    copia[index].respuestas.push([]);
+    setPreguntas(copia);
+  };
+
   const actualizarElemento = (index, elIndex, campo, valor) => {
     const copia = [...preguntas];
     copia[index].elementos[elIndex][campo] = valor;
     setPreguntas(copia);
   };
 
-  const manejarDrop = (e, index, zona) => {
+  const manejarDrop = (e, index, zonaIndex) => {
     e.preventDefault();
     const id = e.dataTransfer.getData("id");
     const copia = [...preguntas];
-    const yaEsta = copia[index].respuesta.includes(id);
-    if (zona === "respuesta" && !yaEsta) {
-      copia[index].respuesta.push(id);
-    } else if (zona === "creacion") {
-      copia[index].respuesta = copia[index].respuesta.filter((i) => i !== id);
+    const zona = copia[index].respuestas[zonaIndex];
+    if (!zona.includes(id)) {
+      zona.push(id);
     }
+    setPreguntas(copia);
+  };
+
+  const removerDeZona = (index, idEliminar) => {
+    const copia = [...preguntas];
+    copia[index].respuestas = copia[index].respuestas.map(zona =>
+      zona.filter((id) => id !== idEliminar)
+    );
     setPreguntas(copia);
   };
 
@@ -56,7 +68,7 @@ const EditorCuestionario = () => {
       ...p,
       elementos: p.elementos.map((e) => ({
         ...e,
-        correcto: p.respuesta.includes(e.id.toString()),
+        correcto: p.respuestas.some((zona) => zona.includes(e.id.toString())),
       })),
       grupo: nombreGrupo,
       categoria: categoria,
@@ -79,17 +91,13 @@ const EditorCuestionario = () => {
         />
 
         <label>Categoría del cuestionario:</label>
-        <select
-          value={categoria}
-          onChange={(e) => setCategoria(e.target.value)}
-        >
+        <select value={categoria} onChange={(e) => setCategoria(e.target.value)}>
           <option value="">Selecciona una categoría</option>
           <option value="geografia">Geografía</option>
           <option value="deportes">Deportes</option>
           <option value="tecnologia">Tecnología</option>
           <option value="otros">Otros</option>
         </select>
-
       </section>
 
       {preguntas.map((preg, i) => (
@@ -115,8 +123,6 @@ const EditorCuestionario = () => {
               copia[i].descripcion = e.target.value;
               setPreguntas(copia);
             }}
-            rows={3}
-            style={{ width: "100%", marginTop: "10px", padding: "10px", borderRadius: "6px", border: "1px solid #ccc" }}
           />
 
           <label>Imagen del enunciado:</label>
@@ -176,47 +182,42 @@ const EditorCuestionario = () => {
 
           <button onClick={() => agregarElemento(i)}>+ Añadir elemento</button>
 
-          <h4>Elementos creados:</h4>
-          <div
-            className="dropzone"
-            onDragOver={(e) => e.preventDefault()}
-            onDrop={(e) => manejarDrop(e, i, "creacion")}
-          >
-            {preg.elementos
-              .filter((el) => !preg.respuesta.includes(el.id.toString()))
-              .map((el) => (
-                <div
-                  className="preview-item"
-                  key={el.id}
-                  draggable
-                  onDragStart={(e) => e.dataTransfer.setData("id", el.id.toString())}
-                >
-                  {el.imagen && <img src={el.imagen} alt="" />}
-                  <p>{el.texto}</p>
-                </div>
-              ))}
+          <h4>Zona de elementos para arrastrar:</h4>
+          <div className="dropzone">
+            {preg.elementos.map((el) => (
+              <div
+                className="preview-item"
+                key={el.id}
+                draggable
+                onDragStart={(e) => e.dataTransfer.setData("id", el.id.toString())}
+              >
+                {el.imagen && <img src={el.imagen} alt="" />}
+                <p>{el.texto}</p>
+              </div>
+            ))}
           </div>
 
-          <h4>Arrastra aquí para definir la respuesta/s correcta:</h4>
-          <div
-            className="dropzone"
-            onDragOver={(e) => e.preventDefault()}
-            onDrop={(e) => manejarDrop(e, i, "respuesta")}
-          >
-            {preg.elementos
-              .filter((el) => preg.respuesta.includes(el.id.toString()))
-              .map((el) => (
-                <div
-                  className="preview-item"
-                  key={el.id}
-                  draggable
-                  onDragStart={(e) => e.dataTransfer.setData("id", el.id.toString())}
-                >
-                  {el.imagen && <img src={el.imagen} alt="" />}
-                  <p>{el.texto}</p>
-                </div>
-              ))}
-          </div>
+          <h4>Zonas de respuesta:</h4>
+          {preg.respuestas.map((zona, zIndex) => (
+            <div
+              key={zIndex}
+              className="dropzone"
+              onDragOver={(e) => e.preventDefault()}
+              onDrop={(e) => manejarDrop(e, i, zIndex)}
+            >
+              {zona.map((id) => {
+                const el = preg.elementos.find((e) => e.id.toString() === id);
+                if (!el) return null;
+                return (
+                  <div className="preview-item" key={id} draggable onDragStart={(e) => e.dataTransfer.setData("id", id)}>
+                    {el.imagen && <img src={el.imagen} alt="" />}
+                    <p>{el.texto}</p>
+                  </div>
+                );
+              })}
+            </div>
+          ))}
+          <button onClick={() => agregarZonaRespuesta(i)}>+ Añadir zona de respuesta</button>
         </div>
       ))}
 
