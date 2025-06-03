@@ -1,5 +1,5 @@
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react"; 
+import { useNavigate } from "react-router-dom";      
 import "./editorCuestionarioEstilo.css";
 
 const EditorCuestionario = () => {
@@ -7,6 +7,19 @@ const EditorCuestionario = () => {
   const [nombreGrupo, setNombreGrupo] = useState("");
   const [vistaActiva, setVistaActiva] = useState(false);
   const [categoria, setCategoria] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem("trabajoEnCurso") || "[]");
+    if (data.length > 0) {
+      setPreguntas(data);
+      setNombreGrupo(data[0]?.grupo || "");
+      setCategoria(data[0]?.categoria || "");
+      setVistaActiva(true);
+      localStorage.removeItem("trabajoEnCurso"); 
+    }
+  }, []);
+
 
   const agregarPregunta = () => {
     setPreguntas((prev) => [
@@ -73,6 +86,7 @@ const EditorCuestionario = () => {
       grupo: nombreGrupo,
       categoria: categoria,
     }));
+    localStorage.setItem("trabajoEnCurso", JSON.stringify(cuestionarioFinal));
     localStorage.setItem("cuestionarioCompleto", JSON.stringify(cuestionarioFinal));
     alert("Trabajo guardado correctamente");
     setVistaActiva(true);
@@ -223,7 +237,7 @@ const EditorCuestionario = () => {
 
       <button onClick={agregarPregunta}>Crear nueva pregunta</button>
       <button onClick={guardarTrabajo}>Guardar trabajo</button>
-      <button disabled={!vistaActiva} onClick={() => window.location.href = "/cuestionario"}>
+      <button disabled={!vistaActiva} onClick={() => navigate("/cuestionario")}>
         Vista previa
       </button>
     </div>
