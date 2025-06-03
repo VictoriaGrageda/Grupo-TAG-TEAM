@@ -150,3 +150,17 @@ button:hover {
   text-align: justify;
 }
 
+.tarjeta-pregunta {
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 25px;
+  margin: 20px auto;
+  max-width: 900px;
+  transition: transform 0.3s ease;
+}
+
+.tarjeta-pregunta:hover {
+  transform: translateY(-3px);
+}
+
