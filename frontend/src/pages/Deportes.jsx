@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ModalDificultad from "../assets/ModalDificultad";
 
+ 
 
 export default function Deportes() {
   const [mostrarModal, setMostrarModal] = useState(true);
@@ -14,24 +15,34 @@ export default function Deportes() {
   };
 
   const manejarCancelar = () => {
-    navigate("/");
+    navigate("/home");
+  };
+
+  const renderizarPregunta = () => {
+    if (dificultad === "Fácil");
+    if (dificultad === "Intermedio") ;
+    if (dificultad === "Difícil");
+    return null;
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-100 to-green-300 p-10 flex flex-col items-center justify-center text-center">
+    <div className="Deportes-container">
       {mostrarModal && (
         <ModalDificultad onSelect={manejarSeleccion} onClose={manejarCancelar} />
       )}
 
       {!mostrarModal && (
         <>
-          <h1 className="text-4xl font-bold text-green-700 mb-4">Categoría: Deportes</h1>
-          <p className="text-gray-700 text-lg max-w-xl mb-6">
+          <button className="btn-regresar" onClick={() => navigate("/home")}>
+            ⬅ 
+          </button>
+
+          <h1 className="Deportes-titulo">Categoría: Deportes</h1>
+          <p className="Deportes-subtitulo">
             Dificultad seleccionada: <strong>{dificultad}</strong>
           </p>
 
-          {dificultad && <PreguntaRompecabezasDeportes nivel={dificultad} />}
-
+          {renderizarPregunta()}
         </>
       )}
     </div>
