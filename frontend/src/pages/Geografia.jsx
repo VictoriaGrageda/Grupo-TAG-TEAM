@@ -17,7 +17,7 @@ export default function Geografia() {
   };
 
   const manejarCancelar = () => {
-    navigate("/");
+    navigate("/home");
   };
 
   const preguntasPorNivel = {
