@@ -11,12 +11,11 @@ const planetasIniciales = [
   { nombre: "Saturno", orden: 6, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Saturn_during_Equinox.jpg/100px-Saturn.jpg" },
   { nombre: "Urano", orden: 7, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Uranus2.jpg/100px-Uranus.jpg" },
   { nombre: "Neptuno", orden: 8, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Neptune_Full.jpg/100px-Neptune.jpg" },
-  { nombre: "", orden: 9, img: "" } // Extra slot vacío
 ];
 
 export default function PuzzlePlanetas() {
   const [piezas, setPiezas] = useState([]);
-  const [dropzone, setDropzone] = useState(Array(9).fill(null));
+  const [dropzone, setDropzone] = useState(Array(8).fill(null));
   const [resultado, setResultado] = useState("");
 
   useEffect(() => {
