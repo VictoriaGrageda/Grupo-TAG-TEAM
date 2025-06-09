@@ -164,3 +164,37 @@ button:hover {
   transform: translateY(-3px);
 }
 
+/*responsive*/
+@media (max-width: 600px) {
+  .contenedor-planetas {
+    padding: 10px;
+  }
+
+  .item-planeta {
+    width: 80px;
+    padding: 4px;
+    font-size: 0.85rem;
+  }
+
+  .item-planeta img {
+    border-radius: 4px;
+  }
+
+  .zona-drop,
+  .zona-piezas {
+    flex-direction: column;
+    gap: 10px;
+    padding: 8px;
+    min-height: auto;
+  }
+
+  button {
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  #resultado {
+    font-size: 1rem;
+    margin-top: 10px;
+  }
+}

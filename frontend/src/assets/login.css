@@ -57,3 +57,32 @@
   text-align: center;
   padding: 35px;
 }
+
+/*responsive*/
+@media (max-width: 600px) {
+  .login-form {
+    width: 90%;
+    padding: 1.5rem;
+  }
+
+  .login-main h3 {
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .login-form input,
+  .login-form button {
+    font-size: 1rem;
+  }
+
+  .login-header h2 {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  .login-footer {
+    padding: 20px;
+    font-size: 0.9rem;
+  }
+}

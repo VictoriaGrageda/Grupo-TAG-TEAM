@@ -39,3 +39,28 @@
 img {
   display: block;
 }
+
+/*responsive*/
+@media (max-width: 600px) {
+  .pregunta-contenedor {
+    padding: 1rem;
+  }
+
+  .zona-respuesta,
+  .zona-opciones {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 0.75rem;
+  }
+
+  .tarjeta {
+    width: 90%;
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .tarjeta img {
+    height: 60px;
+  }
+}

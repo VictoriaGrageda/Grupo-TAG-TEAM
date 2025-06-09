@@ -70,3 +70,38 @@ button:hover {
   margin-top: 5px;
   border-radius: 4px;
 }
+/*responsive*/
+@media (max-width: 600px) {
+  .vista-cuestionario {
+    padding: 10px;
+  }
+
+  .pregunta-block {
+    margin: 10px auto;
+    padding: 10px;
+    max-width: 95%;
+  }
+
+  .dropzone {
+    flex-direction: column;
+    gap: 8px;
+    padding: 8px;
+    min-height: auto;
+  }
+
+  .preview-item {
+    width: 100%;
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+
+  .preview-item img {
+    height: auto;
+    max-width: 100%;
+  }
+
+  button {
+    width: 100%;
+    font-size: 1rem;
+  }
+}
