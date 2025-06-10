@@ -144,3 +144,23 @@ button.restart:hover {
     min-width: 120px;
   }
 }
+/* === Responsive === */
+@media (max-width: 600px) {
+  .card {
+    padding: 1rem;
+    margin: 1rem;
+    max-width: 90%;
+  }
+
+  .card-title {
+    font-size: 1.2rem;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .pieza {
+    font-size: 1rem;
+    min-width: auto;
+    width: 100%;
+  }
+}
