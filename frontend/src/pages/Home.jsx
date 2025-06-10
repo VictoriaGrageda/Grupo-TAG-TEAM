@@ -1,9 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import { Monitor, Globe, Gamepad2 } from "lucide-react";
-import '../index.css';
+import { Monitor, Globe, Gamepad2, User } from "lucide-react";
+import { useAuth } from "../AuthContext";
+import "../index.css";
 
 export default function Home() {
   const navigate = useNavigate();
+  const { rol, nombre, logout } = useAuth();
 
   const categorias = [
     {
@@ -38,6 +40,19 @@ export default function Home() {
 
   return (
     <div className="home-container">
+      {/* Sección de cuenta */}
+      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "1rem" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+          <User />
+          <span>
+            {nombre} ({rol})
+          </span>
+        </div>
+        <button onClick={logout} className="card-button bg-red-600 text-white">
+          Cerrar sesión
+        </button>
+      </div>
+
       <h1 className="home-title">Plataforma de Cuestionarios</h1>
       <p className="home-description">
         ¡Pon a prueba tus conocimientos en distintas categorías! Selecciona una para comenzar.
@@ -59,15 +74,16 @@ export default function Home() {
         ))}
       </div>
 
-      <div style={{ textAlign: "center", marginTop: "3rem" }}>
-        <button
-          className="card-button"
-          onClick={() => navigate("/editor")}
-        >
-          Crear Cuestionario
-        </button>
-      </div>
-
+      {rol === "profesor" && (
+        <div style={{ textAlign: "center", marginTop: "3rem" }}>
+          <button
+            className="card-button bg-black text-white"
+            onClick={() => navigate("/editor")}
+          >
+            Crear Cuestionario
+          </button>
+        </div>
+      )}
     </div>
   );
 }
