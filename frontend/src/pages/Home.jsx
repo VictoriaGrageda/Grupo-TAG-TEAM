@@ -5,7 +5,7 @@ import "../index.css";
 
 export default function Home() {
   const navigate = useNavigate();
-  const { rol, nombre, logout } = useAuth();
+  const { user, logout } = useAuth(); // ahora sacamos el user completo
 
   const categorias = [
     {
@@ -45,7 +45,7 @@ export default function Home() {
         <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
           <User />
           <span>
-            {nombre} ({rol})
+            {user?.nombre} ({user?.rol})
           </span>
         </div>
         <button onClick={logout} className="card-button bg-red-600 text-white">
@@ -74,7 +74,7 @@ export default function Home() {
         ))}
       </div>
 
-      {rol === "profesor" && (
+      {user?.rol === "profesor" && (
         <div style={{ textAlign: "center", marginTop: "3rem" }}>
           <button
             className="card-button bg-black text-white"
