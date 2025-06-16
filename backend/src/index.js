@@ -18,7 +18,7 @@ app.use(fileUpload({
 }));
 
 // 🔐 Rutas de autenticación
-const authRoutes = require('./modules/auth/routes/authRoutes');
+const authRoutes = require('./modules/auth/routes/user.routes');
 app.use('/api/auth', authRoutes); // ← añade rutas de login/register
 
 // 📦 Rutas de preguntas
