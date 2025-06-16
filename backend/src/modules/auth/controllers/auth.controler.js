@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { getUserByEmail, createUser } = require('../models/userModel');
+const { getUserByEmail, createUser } = require('../models/user.model');
 
 const register = async (req, res) => {
   const { nombre, email, password } = req.body;
@@ -36,7 +36,6 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
   const { email, password } = req.body;
-
   try {
     const user = await getUserByEmail(email);
     if (!user) {
@@ -56,5 +55,4 @@ const login = async (req, res) => {
     res.status(500).json({ msg: 'Error al iniciar sesión', error });
   }
 };
-
 module.exports = { register, login };
