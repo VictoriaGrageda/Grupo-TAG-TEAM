@@ -76,21 +76,38 @@ const EditorCuestionario = () => {
     setPreguntas(copia);
   };
 
-  const guardarTrabajo = () => {
-    const cuestionarioFinal = preguntas.map((p) => ({
-      ...p,
-      elementos: p.elementos.map((e) => ({
-        ...e,
-        correcto: p.respuestas.some((zona) => zona.includes(e.id.toString())),
-      })),
-      grupo: nombreGrupo,
-      categoria: categoria,
-    }));
-    localStorage.setItem("trabajoEnCurso", JSON.stringify(cuestionarioFinal));
-    localStorage.setItem("cuestionarioCompleto", JSON.stringify(cuestionarioFinal));
-    alert("Trabajo guardado correctamente");
-    setVistaActiva(true);
+const guardarTrabajo = async () => {
+  const datosPregunta = {
+    titulo: nombreCuestionario,  // string del input principal
+    descripcion: descripcionPregunta, // string del textarea opcional
+    categoria: categoriaSeleccionada, // ejemplo: "Geografía"
+    dificultad: dificultadSeleccionada, // ejemplo: "Intermedio"
+    imagen: null, // o nombre de archivo si se sube imagen
+    elementos: elementos.map(el => ({
+      nombre: el.texto, // nombre visible en la tarjeta
+      imagen: el.imagen || null // si tiene imagen
+    })),
+    respuestas: zonasRespuesta.map(zona => zona.texto) // orden correcto
   };
+
+  try {
+    const res = await fetch("http://localhost:3001/api/preguntas", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(datosPregunta)
+    });
+
+    if (!res.ok) throw new Error("Error al guardar la pregunta");
+
+    const json = await res.json();
+    alert("Pregunta guardada con éxito ✅");
+  } catch (error) {
+    console.error(error);
+    alert("Ocurrió un error al guardar la pregunta ❌");
+  }
+};
 
   return (
     <div className="vista-cuestionario">

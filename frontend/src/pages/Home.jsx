@@ -1,11 +1,27 @@
 import { useNavigate } from "react-router-dom";
-import { Monitor, Globe, Gamepad2, User } from "lucide-react";
+import { Monitor, Globe, Gamepad2 } from "lucide-react";
 import { useAuth } from "../AuthContext";
+import { useState, useRef, useEffect } from "react";
 import "../index.css";
 
 export default function Home() {
   const navigate = useNavigate();
-  const { user, logout } = useAuth(); // ahora sacamos el user completo
+  const { user, logout } = useAuth();
+
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef();
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const avatarLetter = user?.nombre?.charAt(0).toUpperCase() || "U";
 
   const categorias = [
     {
@@ -38,19 +54,30 @@ export default function Home() {
     },
   ];
 
+  if (!user) return <div className="loading">Cargando usuario...</div>;
+
   return (
     <div className="home-container">
-      {/* Sección de cuenta */}
-      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "1rem" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-          <User />
-          <span>
-            {user?.nombre} ({user?.rol})
-          </span>
+      <div className="user-google-style" ref={menuRef}>
+        <div className="avatar" onClick={() => setMenuOpen(!menuOpen)}>
+          {avatarLetter}
         </div>
-        <button onClick={logout} className="card-button bg-red-600 text-white">
-          Cerrar sesión
-        </button>
+        {menuOpen && (
+          <div className="dropdown-menu">
+            <div className="dropdown-header">
+              <div className="dropdown-avatar">{avatarLetter}</div>
+              <div>
+                <div className="dropdown-name">{user?.nombre}</div>
+                <div className="dropdown-role">Rol: {user?.rol}</div>
+              </div>
+            </div>
+            <hr />
+            <button onClick={() => alert("Gestionar cuenta próximamente 😅")}>
+              Gestionar cuenta
+            </button>
+            <button onClick={logout}>Cerrar sesión</button>
+          </div>
+        )}
       </div>
 
       <h1 className="home-title">Plataforma de Cuestionarios</h1>
