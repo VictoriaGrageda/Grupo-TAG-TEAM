@@ -1,0 +1,130 @@
+.editor-container {
+  font-family: Arial, sans-serif;
+  background-color: #fae5fe;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+h1 {
+  text-align: center;
+}
+
+section {
+  background: #fff;
+  margin: 15px auto;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 900px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+input[type="text"], input[type="file"], select {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 10px 5px;
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #2980b9;
+}
+
+.pregunta-block {
+  background: #fff;
+  border: 1px solid #ccc;
+  margin: 20px auto;
+  padding: 15px;
+  border-radius: 10px;
+  max-width: 900px;
+}
+
+.elemento {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.dropzone {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  min-height: 80px;
+  padding: 10px;
+  border: 2px dashed #888;
+  background: #eef;
+  border-radius: 10px;
+  margin-top: 10px;
+  justify-content: center;
+}
+
+.preview-item {
+  width: 120px;
+  background: white;
+  border: 2px dashed #aaa;
+  padding: 10px;
+  text-align: center;
+  border-radius: 8px;
+}
+
+.preview-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+
+}
+
+textarea {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  resize: vertical;
+  font-family: inherit;
+}
+/*responsive*/
+@media (max-width: 768px) {
+  section,
+  .pregunta-block {
+    padding: 15px;
+    margin: 10px;
+    max-width: 95%;
+  }
+
+  input[type="text"],
+  input[type="file"],
+  select {
+    font-size: 1rem;
+    padding: 8px;
+  }
+
+  .elemento {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 5px;
+  }
+
+  button {
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  .dropzone {
+    flex-direction: column;
+    gap: 8px;
+    min-height: 60px;
+  }
+}
+
