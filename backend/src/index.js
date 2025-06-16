@@ -22,7 +22,7 @@ const authRoutes = require('./modules/auth/routes/user.routes');
 app.use('/api/auth', authRoutes); // ← añade rutas de login/register
 
 // 📦 Rutas de preguntas
-const questionRoutes = require('./question/router/questionRouter');
+const questionRoutes = require('./modules/question/router/question.routes');
 app.use('/api', questionRoutes);
 
 // Servidor
