@@ -2,8 +2,20 @@ const express = require('express');
 const { PrismaClient } = require('@prisma/client');
 const app = express();
 const prisma = new PrismaClient();
+const cloudinary = require('cloudinary').v2;
+const fileUpload = require('express-fileupload');
+require('dotenv').config();
 
 app.use(express.json());
+cloudinary.config({ 
+  cloud_name: 'dkkpsyzkl', 
+  api_key: process.env.CLOUDINARY_API_KEY, 
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
+app.use(fileUpload({
+  useTempFiles: true,
+  tempFileDir: './tmp/'
+}));
 
 // 🔐 AUTENTICACIÓN
 const authRoutes = require('./auth/routes/authRoutes');
@@ -24,17 +36,34 @@ app.get('/api/question/:id', async (req, res) => {
   res.json(pregunta);
 });
 
-// POST - Crear nueva pregunta
+// POST - Crear nueva pregunta con imagen subida a Cloudinary
 app.post('/api/question', async (req, res) => {
-  const { enunciado, categoria, dificultad, respuesta } = req.body;
   try {
+    const { enunciado, categoria, dificultad, respuesta } = req.body;
+    let imagenUrl = null;
+
+    if (req.files && req.files.imagen) {
+      const resultado = await cloudinary.uploader.upload(req.files.imagen.tempFilePath, {
+        folder: 'preguntas'
+      });
+      imagenUrl = resultado.secure_url;
+    }
+
     const nueva = await prisma.pregunta.create({
-      data: { enunciado, categoria, dificultad, respuesta }
+      data: {
+        enunciado,
+        categoria,
+        dificultad,
+        respuesta,
+        url: imagenUrl
+      }
     });
+
     res.status(201).json(nueva);
   } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
+  console.error("ERROR DETECTADO:", error); // <<<< este log es clave
+  res.status(400).json({ error: error.message }); // <<< manda el mensaje real al frontend
+}
 });
 
 // PUT - Actualizar pregunta
