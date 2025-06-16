@@ -5,6 +5,11 @@ const prisma = new PrismaClient();
 
 app.use(express.json());
 
+// 🔐 AUTENTICACIÓN
+const authRoutes = require('./auth/routes/authRoutes');
+app.use('/api/auth', authRoutes); // ← añade rutas de login/register
+
+
 // GET - Todas las preguntas
 app.get('/api/questions', async (req, res) => {
   const preguntas = await prisma.pregunta.findMany();

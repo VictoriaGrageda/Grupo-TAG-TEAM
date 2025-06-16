@@ -20,4 +20,12 @@ model Pregunta {
   categoria     String
   dificultad    String
   respuesta     String
+  url        String?
 }
+model User {
+  id       Int    @id @default(autoincrement())
+  nombre   String
+  email    String @unique
+  password String
+}
+
