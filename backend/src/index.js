@@ -30,7 +30,7 @@ app.use('/api/auth', authRoutes); // ← añade rutas de login/register
 const questionRoutes = require('./modules/question/router/question.routes');
 app.use('/api', questionRoutes);
 
-const userRoutes = require('./modules/user/routes/user.routes');
+const userRoutes = require('./modules/user/router/user.routes');
 app.use('/api', userRoutes);
 
 // Servidor
