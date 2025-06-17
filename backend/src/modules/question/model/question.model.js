@@ -84,7 +84,7 @@ async function obtenerPorCategoria(categoria) {
 // Obtener todas las respuestas de una pregunta
 async function obtenerRespuestasPorPregunta(preguntaId) {
   return await prisma.respuesta.findMany({
-    where: { preguntaId: parseInt(preguntaId) },
+    where: { preguntaId },
   });
 }
 
