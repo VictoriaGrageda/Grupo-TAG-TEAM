@@ -48,3 +48,43 @@ exports.obtenerPorCategoria = async (req, res) => {
     return res.status(404).json({ error: 'No se encontraron preguntas para esa categoría' });
   res.json(preguntas);
 };
+
+exports.obtenerRespuestasPorPregunta = async (req, res) => {
+  const respuestas = await preguntaModel.obtenerRespuestasPorPregunta(parseInt(req.params.preguntaId));
+  res.json(respuestas);
+};
+
+exports.crearRespuesta = async (req, res) => {
+  try {
+    const nueva = await preguntaModel.crearRespuesta({
+      ...req.body,
+      imagen: req.files?.imagen,
+    });
+    res.status(201).json(nueva);
+  } catch (error) {
+    console.error('Error al crear respuesta:', error);
+    res.status(400).json({ error: error.message });
+  }
+};
+
+exports.actualizarRespuesta = async (req, res) => {
+  try {
+    const actualizada = await preguntaModel.actualizarRespuesta(parseInt(req.params.id), {
+      ...req.body,
+      imagen: req.files?.imagen,
+    });
+    res.json(actualizada);
+  } catch (error) {
+    console.error('Error al actualizar respuesta:', error);
+    res.status(400).json({ error: 'No se pudo actualizar la respuesta' });
+  }
+};
+
+exports.eliminarRespuesta = async (req, res) => {
+  try {
+    await preguntaModel.eliminarRespuesta(parseInt(req.params.id));
+    res.json({ mensaje: 'Respuesta eliminada correctamente' });
+  } catch (error) {
+    res.status(404).json({ error: 'No se pudo eliminar la respuesta' });
+  }
+};
