@@ -9,18 +9,31 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-model Pregunta {
-  id            Int      @id @default(autoincrement())
-  enunciado     String
-  categoria     String
-  dificultad    String
-  respuesta     String
-  url        String?
-}
 model User {
-  id       Int    @id @default(autoincrement())
-  nombre   String
-  email    String @unique
-  password String
+  id        Int        @id @default(autoincrement())
+  nombre    String
+  email     String     @unique
+  password  String
+  preguntas Pregunta[]
+}
+
+model Pregunta {
+  id         Int        @id @default(autoincrement())
+  enunciado  String
+  categoria  String
+  dificultad String
+  respuesta  String
+  imagenUrl  String?
+  userId     Int
+  user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  respuestas Respuesta[]
+}
+
+model Respuesta {
+  id         Int      @id @default(autoincrement())
+  texto      String
+  imagenUrl  String?
+  preguntaId Int
+  pregunta   Pregunta @relation(fields: [preguntaId], references: [id], onDelete: Cascade)
 }
 
