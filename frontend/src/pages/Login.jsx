@@ -11,42 +11,42 @@ export default function Login() {
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
-    e.preventDefault();
-    setError("");
+  e.preventDefault();
+  setError("");
 
-    const correoValido = /^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(correo);
-    if (!correoValido) {
-      setError("Solo se permiten correos @gmail.com");
+  const correoValido = /^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(correo);
+  if (!correoValido) {
+    setError("Solo se permiten correos @gmail.com");
+    return;
+  }
+
+  const contraseñaValida = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/.test(contraseña);
+  if (!contraseñaValida) {
+    setError("La contraseña debe tener mínimo 6 caracteres, una letra y un número");
+    return;
+  }
+
+  try {
+    const res = await fetch("http://localhost:3000/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: correo, password: contraseña }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      setError(data.msg || "Error al iniciar sesión");
       return;
     }
 
-    const contraseñaValida = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/.test(contraseña);
-    if (!contraseñaValida) {
-      setError("La contraseña debe tener mínimo 6 caracteres, una letra y un número");
-      return;
-    }
-
-    try {
-      const res = await fetch("http://localhost:3000/api/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ correo, password: contraseña }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        setError(data.error || "Error al iniciar sesión");
-        return;
-      }
-
-      login(data.user);
-      navigate("/home");
-    } catch (err) {
-      console.error("Error:", err);
-      setError("No se pudo conectar con el servidor");
-    }
-  };
+    login(data.user); // viene de useAuth
+    navigate("/home");
+  } catch (err) {
+    console.error("Error:", err);
+    setError("No se pudo conectar con el servidor");
+  }
+};
 
   return (
     <div className="login-wrapper">

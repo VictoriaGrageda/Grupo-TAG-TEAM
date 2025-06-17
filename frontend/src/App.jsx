@@ -10,7 +10,7 @@ import EditorCuestionario from "./pages/creacionCuestionarios/EditorCuestionario
 import VistaCuestionario from "./pages/creacionCuestionarios/VistaCuestionario";
 import { RutaPrivada } from "./PrivateRoutes";
 import Registro from "./pages/Registro";
-import { AuthProvider } from "./AuthContext"; // ✅ ENVOLVER CONTEXTO
+import { AuthProvider } from "./AuthContext";
 import "./App.css";
 
 function App() {

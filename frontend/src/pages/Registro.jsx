@@ -35,12 +35,12 @@ export default function Registro() {
 
     // Enviar datos al backend
     try {
-      const res = await fetch("http://localhost:3000/api/auth/registro", {
+      const res = await fetch("http://localhost:3000/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          nombre,
-          correo,
+          nombre: nombre,
+          email: correo,
           password: contraseña,
           rol
         }),
@@ -98,7 +98,6 @@ export default function Registro() {
 
         <div className="input-group">
           <select value={rol} onChange={(e) => setRol(e.target.value)} required>
-            <option value="estudiante">Estudiante</option>
             <option value="profesor">Profesor</option>
           </select>
           <label className="label-select">Rol</label>

@@ -6,8 +6,10 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
 
   const login = (userData) => {
-    setUser(userData);
-  };
+  const userConRol = { ...userData, rol: "profesor" }; 
+  setUser(userConRol);
+  localStorage.setItem("user", JSON.stringify(userConRol));
+};
 
   const logout = () => {
     setUser(null);

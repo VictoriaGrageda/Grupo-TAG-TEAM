@@ -68,7 +68,6 @@ export default function Home() {
               <div className="dropdown-avatar">{avatarLetter}</div>
               <div>
                 <div className="dropdown-name">{user?.nombre}</div>
-                <div className="dropdown-role">Rol: {user?.rol}</div>
               </div>
             </div>
             <hr />
