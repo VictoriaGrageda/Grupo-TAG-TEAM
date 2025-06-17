@@ -5,6 +5,7 @@ const prisma = new PrismaClient();
 const cloudinary = require('cloudinary').v2;
 const fileUpload = require('express-fileupload');
 require('dotenv').config();
+const cors = require('cors');
 
 app.use(express.json());
 cloudinary.config({ 
@@ -15,6 +16,10 @@ cloudinary.config({
 app.use(fileUpload({
   useTempFiles: true,
   tempFileDir: './tmp/'
+}));
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true
 }));
 
 // 🔐 Rutas de autenticación
