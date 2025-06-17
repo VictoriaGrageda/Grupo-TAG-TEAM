@@ -30,6 +30,9 @@ app.use('/api/auth', authRoutes); // ← añade rutas de login/register
 const questionRoutes = require('./modules/question/router/question.routes');
 app.use('/api', questionRoutes);
 
+const userRoutes = require('./modules/user/routes/user.routes');
+app.use('/api', userRoutes);
+
 // Servidor
 app.listen(3000, () => {
   console.log('Servidor corriendo en http://localhost:3000');
