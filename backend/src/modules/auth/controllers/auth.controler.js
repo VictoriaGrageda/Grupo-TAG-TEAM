@@ -1,9 +1,13 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { getUserByEmail, createUser } = require('../models/user.model');
+require('dotenv').config();
 
 const register = async (req, res) => {
   const { nombre, email, password } = req.body;
+  if (!nombre || !email || !password) {
+    throw new Error('Faltan campos obligatorios para crear el usuario');
+  }
   try {
     const existingUser = await getUserByEmail(email);
     if (existingUser) {
@@ -16,7 +20,7 @@ const register = async (req, res) => {
       password: hashedPassword,
     });
     const token = jwt.sign(
-      { userId: newUser.id, nombre: newUser.nombre },
+      { userId: newUser.id,email: newUser.email, nombre: newUser.nombre },
       process.env.JWT_SECRET,
       { expiresIn: '2h' }
     );
@@ -30,6 +34,7 @@ const register = async (req, res) => {
       token
     });
   } catch (error) {
+    console.error('Error al crear:', error);
     res.status(500).json({ msg: 'Error en el servidor', error });
   }
 };
