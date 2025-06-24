@@ -20,6 +20,7 @@ model User {
 model Pregunta {
   id         Int        @id @default(autoincrement())
   enunciado  String
+  descripcion String?
   categoria  String
   dificultad String
   respuesta  String

@@ -1,17 +1,18 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Intro from "./pages/Intro";
-import Login from "./pages/Login";
-import Home from "./pages/Home";
-import Geografia from "./pages/Geografia";
-import Deportes from "./pages/Deportes";
-import Tecnologia from "./pages/Tecnologia";
-import Aleatorio from "./pages/Aleatorio";
+import Intro from "./pages/Introduccion";
+import Login from "./pages/auth/Login";
+import Home from "./pages/home/Home";
+import Geografia from "./pages/categorias/Geografia";
+import Deportes from "./pages/categorias/Deportes";
+import Tecnologia from "./pages/categorias/Tecnologia";
+import Aleatorio from "./pages/categorias/Aleatorio";
 import EditorCuestionario from "./pages/creacionCuestionarios/EditorCuestionario";
 import VistaCuestionario from "./pages/creacionCuestionarios/VistaCuestionario";
 import { RutaPrivada } from "./PrivateRoutes";
-import Registro from "./pages/Registro";
+import Registro from "./pages/auth/Registro";
 import { AuthProvider } from "./AuthContext";
 import "./App.css";
+import "./index.css"
 
 function App() {
   return (
