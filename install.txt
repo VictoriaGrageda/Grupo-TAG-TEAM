@@ -41,6 +41,19 @@ CLOUDINARY_API_SECRET="JBkLTytgMQ0Do0dqIF3s0lDOhGg"
 
 JWT_SECRET=supersecreto123
 
+3.3 Instalar dependencias y generar el cliente de Prisma:
+
+npm install
+npx prisma generate
+
+3.4 Iniciar el servidor backend:
+
+npm run dev
+El servidor estará disponible en:
+http://localhost:3000/
+
+
+
 
 
 
