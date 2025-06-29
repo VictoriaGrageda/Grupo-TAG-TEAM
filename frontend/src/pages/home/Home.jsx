@@ -54,31 +54,32 @@ export default function Home() {
       </p>
 
       <div className="card-grid">
-        <CardCategoria
-          icono={<Globe className="card-icon" />}
-          nombre="Geografía"
-          descripcion="Explora países, capitales y mapas."
-          onClick={() => navigate("/Geografia")}
-        />
-        <CardCategoria
-          icono={<Gamepad2 className="card-icon" />}
-          nombre="Deportes"
-          descripcion="Pon a prueba tus conocimientos deportivos."
-          onClick={() => navigate("/Deportes")}
-        />
-        <CardCategoria
-          icono={<Monitor className="card-icon" />}
-          nombre="Tecnología"
-          descripcion="Responde sobre software, hardware e innovación."
-          onClick={() => navigate("/Tecnologia")}
-        />
-        <CardCategoria
-          icono={<Globe className="card-icon" />}
-          nombre="Aleatorio"
-          descripcion="Un mix de todas las categorías."
-          onClick={() => navigate("/Aleatorio")}
-        />
-      </div>
+  <CardCategoria
+    icono={<Globe className="card-icon" />}
+    nombre="Geografía"
+    descripcion="Explora países, capitales y mapas."
+    onClick={() => navigate("/categoria/geografia")} // <-- minúscula
+  />
+  <CardCategoria
+    icono={<Gamepad2 className="card-icon" />}
+    nombre="Deportes"
+    descripcion="Pon a prueba tus conocimientos deportivos."
+    onClick={() => navigate("/categoria/deportes")}
+  />
+  <CardCategoria
+    icono={<Monitor className="card-icon" />}
+    nombre="Tecnología"
+    descripcion="Responde sobre software, hardware e innovación."
+    onClick={() => navigate("/categoria/tecnologia")}
+  />
+  <CardCategoria
+    icono={<Globe className="card-icon" />}
+    nombre="Aleatorio"
+    descripcion="Un mix de todas las categorías."
+    onClick={() => navigate("/categoria/aleatorio")}
+  />
+</div>
+
 
       {user?.rol === "profesor" && (
         <div style={{ textAlign: "center", marginTop: "3rem" }}>
