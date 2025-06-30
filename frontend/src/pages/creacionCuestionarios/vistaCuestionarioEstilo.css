@@ -1,18 +1,56 @@
-.vista-resolver {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 2rem;
+.vista-cuestionario {
   font-family: 'Segoe UI', sans-serif;
-  background-color: #f9f9f9;
-  border-radius: 12px;
+  background-color: #f4f4f4;
+  padding: 20px;
+  min-height: 100vh;
 }
 
-.preg-resolver {
-  margin-top: 2rem;
-  padding: 1.5rem;
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 10px 5px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background: #1d4ed8;
+}
+
+.boton-volver {
+  background-color: #6c5ce7;
+}
+
+.boton-volver:hover {
+  background-color: #5a4bcf;
+}
+
+.pregunta-block {
   background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 900px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+
+.descripcion-pregunta {
+  font-style: italic;
+  color: #555;
+  background-color: #fdfdfd;
+  padding: 10px;
+  border-left: 4px solid #9b59b6;
+  margin-top: 10px;
+  border-radius: 6px;
 }
 
 .img-enunciado {
@@ -22,75 +60,81 @@
   border-radius: 8px;
 }
 
-.zona-elementos,
-.zona-respuestas,
-.zona-drop {
+.dropzone {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
-  margin: 1rem 0;
-  padding: 1rem;
-  border: 2px dashed #ccc;
-  border-radius: 8px;
-  background-color: #fff;
-  min-height: 120px;
-}
-
-.item-elemento,
-.slot-respuesta {
-  width: 100px;
-  text-align: center;
-  background-color: #e6f0ff;
-  padding: 0.5rem;
-  border-radius: 8px;
-  cursor: grab;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-
-.item-elemento:hover {
-  background-color: #d0e7ff;
-}
-
-.img-mini {
-  width: 80px;
-  height: auto;
-  border-radius: 4px;
-  margin-bottom: 0.3rem;
-}
-
-.zona-drop {
+  gap: 10px;
+  min-height: 100px;
+  padding: 10px;
+  border: 2px dashed #aaa;
+  background: #eef;
+  border-radius: 10px;
   justify-content: center;
-  align-items: center;
-  color: #666;
-  font-style: italic;
 }
 
-.btn-verificar {
-  display: inline-block;
-  padding: 0.6rem 1.2rem;
-  background-color: #2563eb;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  margin-top: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s;
+.preview-item {
+  width: 120px;
+  background: white;
+  border: 2px dashed #bbb;
+  padding: 10px;
+  text-align: center;
+  border-radius: 10px;
+  cursor: grab;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s;
 }
 
-.btn-verificar:hover {
-  background-color: #1d4ed8;
+.preview-item:hover {
+  transform: scale(1.05);
+  background-color: #f9f9f9;
+}
+
+.preview-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.zona-tarjetas-contenedor {
+  background-color: #f0e6ff;
+  padding: 20px;
+  border-radius: 15px;
+  border: 2px solid #d0b3ff;
+  margin-top: 10px;
+}
+
+.zona-tarjetas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.tarjeta-respuesta {
+  width: 140px;
+  min-height: 100px;
+  border: 2px dashed #8e44ad;
+  border-radius: 10px;
+  padding: 10px;
+  background: #f9f0ff;
+  text-align: center;
+  transition: background-color 0.2s;
+}
+
+.tarjeta-respuesta:hover {
+  background-color: #f2e2ff;
 }
 
 .correcto {
   color: green;
   font-weight: bold;
-  margin-top: 1rem;
+  margin-top: 10px;
 }
 
 .incorrecto {
   color: red;
   font-weight: bold;
-  margin-top: 1rem;
+  margin-top: 10px;
 }
 
 .info-local {
@@ -98,4 +142,49 @@
   margin-top: 2rem;
   color: #555;
   font-style: italic;
+}
+
+.tarjeta-respuesta img {
+  max-width: 100%;
+  max-height: 100px;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+  object-fit: contain;
+}
+
+.tarjeta-respuesta p {
+  margin-top: 5px;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+
+@media (max-width: 600px) {
+  .vista-cuestionario {
+    padding: 10px;
+  }
+
+  .pregunta-block {
+    margin: 10px auto;
+    padding: 10px;
+    max-width: 95%;
+  }
+
+  .dropzone,
+  .zona-tarjetas {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .preview-item,
+  .tarjeta-respuesta {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+
+  button {
+    width: 100%;
+    font-size: 1rem;
+  }
 }
