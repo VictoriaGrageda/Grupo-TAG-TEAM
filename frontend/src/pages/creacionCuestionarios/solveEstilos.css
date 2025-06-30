@@ -1,0 +1,151 @@
+.contenedor-solve {
+  padding: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 800px;
+  margin: auto;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.titulo-solve {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #1e1e1e;
+  margin-bottom: 1rem;
+}
+
+.titulo-pregunta {
+  font-size: 1.4rem;
+  color: #222;
+  margin-bottom: 0.5rem;
+}
+
+.descripcion-pregunta {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+.imagen-enunciado {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.subtitulo-seccion {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.zona-slots {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 1rem;
+  background-color: #f7f7f7;
+  border: 2px dashed #bbb;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  min-height: 120px;
+}
+
+.slot-drop {
+  width: 100px;
+  height: 100px;
+  border: 2px dashed #aaa;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+}
+
+.zona-disponibles {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 0.5rem;
+  padding: 1rem;
+  background-color: #eef6ff;
+  border-radius: 10px;
+  border: 1px solid #cce0f5;
+}
+
+.elemento-draggable {
+  cursor: grab;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  text-align: center;
+  width: 100px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.imagen-elemento {
+  max-width: 60px;
+  margin-bottom: 0.4rem;
+}
+
+.texto-elemento {
+  font-size: 12px;
+  color: #333;
+}
+
+.botones-verificar {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.btn-verificar {
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-verificar:hover {
+  background-color: #0056b3;
+}
+
+.btn-reiniciar {
+  background-color: #6c757d;
+}
+
+.btn-reiniciar:hover {
+  background-color: #5a6268;
+}
+
+.mensaje-respuesta {
+  margin-top: 1rem;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.mensaje-correcta {
+  color: #28a745; /* Verde */
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.mensaje-incorrecta {
+  color: #dc3545; /* Rojo */
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+

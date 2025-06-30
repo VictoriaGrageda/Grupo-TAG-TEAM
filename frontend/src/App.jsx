@@ -7,12 +7,16 @@ import Deportes from "./pages/categorias/Deportes";
 import Tecnologia from "./pages/categorias/Tecnologia";
 import Aleatorio from "./pages/categorias/Aleatorio";
 import EditorCuestionario from "./pages/creacionCuestionarios/EditorCuestionario";
+import Categoria from "./pages/categorias/Categoria";
 import VistaCuestionario from "./pages/creacionCuestionarios/VistaCuestionario";
 import { RutaPrivada } from "./PrivateRoutes";
 import Registro from "./pages/auth/Registro";
 import { AuthProvider } from "./AuthContext";
 import "./App.css";
-import "./index.css"
+import "./index.css";
+import ListaCuestionarios from "./pages/categorias/ListaCuestionarios";
+import CuestionarioPorCategoria from "./pages/creacionCuestionarios/CuestionarioPorCategoria";
+import SolveQuestionsTab from "./pages/creacionCuestionarios/SolveQuestionsTab";
 
 function App() {
   return (
@@ -29,6 +33,9 @@ function App() {
           <Route path="/aleatorio" element={<RutaPrivada><Aleatorio /></RutaPrivada>} />
           <Route path="/editor" element={<RutaPrivada><EditorCuestionario /></RutaPrivada>} />
           <Route path="/cuestionario" element={<RutaPrivada><VistaCuestionario /></RutaPrivada>} />
+          <Route path="/cuestionarios" element={<RutaPrivada><CuestionarioPorCategoria /></RutaPrivada>} />
+          <Route path="/resolver/:id" element={<SolveQuestionsTab />} />
+          <Route path="/categoria/:categoria" element={<RutaPrivada><Categoria /></RutaPrivada>} />
         </Routes>
       </Router>
     </AuthProvider>

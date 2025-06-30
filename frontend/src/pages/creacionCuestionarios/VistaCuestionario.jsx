@@ -1,138 +1,114 @@
-
+// src/pages/creacionCuestionarios/VistaCuestionario.jsx
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../firebaseConfig";
 import "./vistaCuestionarioEstilo.css";
 
-const VistaCuestionario = () => {
-  const [preguntas, setPreguntas] = useState([]);
-  const navigate = useNavigate();
+export default function VistaCuestionario() {
+  const { id } = useParams();
+  const [cuestionario, setCuestionario] = useState(null);
+  const [usandoLocal, setUsandoLocal] = useState(false);
+  const [respuestaUsuario, setRespuestaUsuario] = useState([]);
+  const [verificado, setVerificado] = useState(false);
+  const [esCorrecto, setEsCorrecto] = useState(false);
+
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("cuestionarioCompleto") || "[]");
-    setPreguntas(data);
-  }, []);
+    const cargarCuestionario = async () => {
+      if (id) {
+        const ref = doc(db, "cuestionarios", id);
+        const snap = await getDoc(ref);
+        if (snap.exists()) {
+          setCuestionario(snap.data());
+        } else {
+          alert("Cuestionario no encontrado");
+        }
+      } else {
+        const local = localStorage.getItem("cuestionarioCompleto");
+        if (local) {
+          setCuestionario(JSON.parse(local));
+          setUsandoLocal(true);
+        }
+      }
+    };
+    cargarCuestionario();
+  }, [id]);
 
-  const verificarTodo = () => {
-    preguntas.forEach((preg, idx) => {
-      const correctos = preg.elementos.filter((e) => e.correcto).map((e) => e.texto);
-      const zonas = document.querySelectorAll(`.tarjeta-respuesta[data-preg="${idx}"]`);
-      const respuestas = Array.from(zonas).map((zona) => {
-        const item = zona.querySelector(".preview-item p");
-        return item ? item.textContent : "";
-      }).filter(Boolean);
-
-      const esCorrecto =
-        respuestas.length === correctos.length &&
-        respuestas.every((txt) => correctos.includes(txt));
-
-      document.getElementById("resultado-" + idx).textContent = esCorrecto
-        ? " Correcto"
-        : " Incorrecto";
-    });
+  const verificarRespuestas = () => {
+    if (!cuestionario) return;
+    const correctas = cuestionario.preguntas[0].respuestas;
+    const iguales = JSON.stringify(correctas) === JSON.stringify(respuestaUsuario);
+    setEsCorrecto(iguales);
+    setVerificado(true);
   };
 
-  const reiniciarRespuestas = () => {
-    const zonas = document.querySelectorAll(".tarjeta-respuesta");
-    zonas.forEach((zona) => (zona.innerHTML = '<span style="font-size:12px;color:#666;">Espacio</span>'));
-    document.querySelectorAll("[id^='resultado-']").forEach((el) => (el.textContent = ""));
-  };
+  if (!cuestionario) return <p>Cargando cuestionario...</p>;
 
-  const volverAEditar = () => {
-    window.location.href = "/";
-  };
+  const pregunta = cuestionario.preguntas[0];
 
   return (
-    <div className="vista-cuestionario">
-      <h1>Resuelve el Cuestionario</h1>
-      {preguntas.map((preg, idx) => {
-        const correctCount = preg.elementos.filter(e => e.correcto).length;
+    <div className="vista-resolver">
+      <h1>{cuestionario.titulo}</h1>
+      <p>
+        Categoría: <strong>{cuestionario.categoria}</strong> | Dificultad: <strong>{pregunta.dificultad}</strong>
+      </p>
 
-        return (
-          <div key={idx} className="pregunta-block">
-            <h3>Pregunta {idx + 1}</h3>
-            {preg.imagenEnunciado && (
-              <img src={preg.imagenEnunciado} alt="" style={{ maxWidth: "300px" }} />
-            )}
-            <p><strong>{preg.titulo}</strong></p>
-            {preg.descripcion && <p className="descripcion-pregunta">{preg.descripcion}</p>}
+      <div className="preg-resolver">
+        <h2>{pregunta.titulo}</h2>
+        <p>{pregunta.descripcion}</p>
+        {pregunta.imagenEnunciado && <img src={pregunta.imagenEnunciado} alt="enunciado" className="img-enunciado" />}
 
-            <div className="dropzone">
-              {[...preg.elementos].sort(() => Math.random() - 0.5).map((e, i) => (
-                <div
-                  key={i}
-                  className="preview-item"
-                  draggable
-                  onDragStart={(ev) => ev.currentTarget.classList.add("dragging")}
-                  onDragEnd={(ev) => ev.currentTarget.classList.remove("dragging")}
-                >
-                  {e.imagen && <img src={e.imagen} alt="" />}
-                  <p>{e.texto}</p>
-                </div>
-              ))}
-            </div>
-
-            <p>Arrastra cada respuesta en su tarjeta correspondiente:</p>
-            <div
-              className="zona-tarjetas-contenedor"
-              style={{
-                backgroundColor: "#f0e6ff",
-                padding: "20px",
-                borderRadius: "15px",
-                border: "2px solid #d0b3ff",
-                marginTop: "10px",
-              }}
-            >
-              <div className="zona-tarjetas" style={{
-                display: "flex",
-                flexWrap: "wrap",
-                gap: "10px",
-                justifyContent: "center"
-              }}>
-                {Array.from({ length: correctCount }).map((_, tIdx) => (
-                  <div
-                    key={tIdx}
-                    className="tarjeta-respuesta"
-                    data-preg={idx}
-                    style={{
-                      width: "140px",
-                      minHeight: "100px",
-                      border: "2px dashed #8e44ad",
-                      borderRadius: "10px",
-                      padding: "10px",
-                      background: "#f9f0ff",
-                      textAlign: "center"
-                    }}
-                    onDragOver={(e) => e.preventDefault()}
-                    onDrop={(e) => {
-                      const dragging = document.querySelector(".dragging");
-                      if (dragging) {
-                        e.currentTarget.innerHTML = "";
-                        e.currentTarget.appendChild(dragging);
-                      }
-                    }}
-                  >
-                    <span style={{ fontSize: "12px", color: "#666" }}>Espacio {tIdx + 1}</span>
-                  </div>
-                ))}
+        <h3>Zona de respuesta:</h3>
+        <div className="zona-respuestas">
+          {respuestaUsuario.map((id, index) => {
+            const el = pregunta.elementos.find((e) => e.id === id);
+            return (
+              <div key={index} className="slot-respuesta">
+                {el?.imagen && <img src={el.imagen} alt="" className="img-mini" />}
+                <p>{el?.texto}</p>
               </div>
+            );
+          })}
+        </div>
+
+        <h3>Elementos disponibles:</h3>
+        <div className="zona-elementos">
+          {pregunta.elementos.map((el) => (
+            <div
+              key={el.id}
+              className="item-elemento"
+              draggable
+              onDragStart={(e) => e.dataTransfer.setData("id", el.id)}
+            >
+              {el.imagen && <img src={el.imagen} alt="" className="img-mini" />}
+              <p>{el.texto}</p>
             </div>
+          ))}
+        </div>
 
-            <p id={`resultado-${idx}`}></p>
-          </div>
-        );
-      })}
+        <div
+          className="zona-drop"
+          onDragOver={(e) => e.preventDefault()}
+          onDrop={(e) => {
+            const id = e.dataTransfer.getData("id");
+            if (!respuestaUsuario.includes(id)) {
+              setRespuestaUsuario([...respuestaUsuario, id]);
+            }
+          }}
+        >
+          <p>Arrastra aquí los elementos en el orden correcto</p>
+        </div>
 
-      <div style={{ textAlign: "center", marginTop: "30px" }}>
-        <button onClick={verificarTodo}>Verificar todas las respuestas</button>
-        <button onClick={reiniciarRespuestas}>Reiniciar respuestas</button>
-        <button onClick={() => {
-          localStorage.setItem("trabajoEnCurso", JSON.stringify(preguntas));
-          navigate("/editor");
-        }} className="boton-volver">
-          Volver al editor
-        </button>
+        <button onClick={verificarRespuestas} className="btn-verificar">Verificar respuesta</button>
+
+        {verificado && (
+          <p className={esCorrecto ? "correcto" : "incorrecto"}>
+            {esCorrecto ? "✅ ¡Correcto!" : "❌ Intenta nuevamente."}
+          </p>
+        )}
       </div>
+
+      {usandoLocal && <p className="info-local">Esta es una vista previa local (sin guardar en Firebase).</p>}
     </div>
   );
-};
-
-export default VistaCuestionario;
+}
