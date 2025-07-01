@@ -108,7 +108,7 @@ export default function EditorCuestionario() {
 
   const guardarTrabajo = async () => {
   if (!categoria) {
-    alert("Debes seleccionar una categoría antes de guardar.");
+    alert(" Debes seleccionar una categoría antes de guardar.");
     return;
   }
 
@@ -172,13 +172,6 @@ export default function EditorCuestionario() {
 
       {preguntas.map((preg, i) => (
         <div key={i} className="pregunta-block">
-          <button
-            onClick={() => eliminarPregunta(i)}
-            style={{ backgroundColor: "#c0392b", marginTop: "10px" }}
-          >
-            Eliminar esta pregunta
-          </button>
- 
           <label>Enunciado:</label>
           <input
             type="text"
