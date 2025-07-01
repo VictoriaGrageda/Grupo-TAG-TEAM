@@ -17,7 +17,13 @@ export default function EditorCuestionario() {
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("trabajoEnCurso") || "[]");
     if (data.length > 0) {
-      setPreguntas(data);
+      //setPreguntas(data);
+      const preguntasSeguras = data.map(p => ({
+        ...p,
+        respuestas: Array.isArray(p.respuestas) ? p.respuestas : [[]],
+      }));
+      setPreguntas(preguntasSeguras);
+      
       setNombreGrupo(data[0]?.grupo || "");
       setCategoria(data[0]?.categoria || "");
       setVistaActiva(true);
@@ -265,8 +271,8 @@ export default function EditorCuestionario() {
             ))}
           </div>
 
-          <h4>Zonas de respuesta:</h4>
-          {preg.respuestas.map((zona, zIndex) => (
+          <h4>Zonas de respuesta:</h4>   
+          {Array.isArray(preg.respuestas) && preg.respuestas.map((zona, zIndex) => (
             <div key={zIndex} style={{ marginBottom: "10px" }}>
               <div
                 className="dropzone"
