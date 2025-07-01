@@ -69,16 +69,25 @@ export default function EditorCuestionario() {
   };
 
   const eliminarElemento = (pregIndex, elId) => {
-  const copia = [...preguntas];
-  // Elimina el elemento con el id dado
-  copia[pregIndex].elementos = copia[pregIndex].elementos.filter((el) => el.id !== elId);
-  // También lo remueve de las zonas de respuesta si estaba usado
-  copia[pregIndex].respuestas = copia[pregIndex].respuestas.map((zona) =>
-    zona.filter((id) => id !== elId)
-  );
-  setPreguntas(copia);
-};
+    const copia = [...preguntas];
+    copia[pregIndex].elementos = copia[pregIndex].elementos.filter((el) => el.id !== elId);
+    copia[pregIndex].respuestas = copia[pregIndex].respuestas.map((zona) =>
+      zona.filter((id) => id !== elId)
+    );
+    setPreguntas(copia);
+  };
 
+  const eliminarZonaRespuesta = (pregIndex, zonaIndex) => {
+    const copia = [...preguntas];
+    copia[pregIndex].respuestas.splice(zonaIndex, 1); 
+    setPreguntas(copia);
+  };
+
+  const eliminarPregunta = (pregIndex) => {
+    const copia = [...preguntas];
+    copia.splice(pregIndex, 1);
+    setPreguntas(copia);
+  };
 
   const manejarDrop = (e, pregIndex, zonaIndex) => {
     e.preventDefault();
@@ -258,29 +267,38 @@ export default function EditorCuestionario() {
 
           <h4>Zonas de respuesta:</h4>
           {preg.respuestas.map((zona, zIndex) => (
-            <div
-              key={zIndex}
-              className="dropzone"
-              onDragOver={(e) => e.preventDefault()}
-              onDrop={(e) => manejarDrop(e, i, zIndex)}
-            >
-              {zona.map((id) => {
-                const el = preg.elementos.find((e) => e.id === id);
-                if (!el) return null;
-                return (
-                  <div
-                    key={id}
-                    className="preview-item"
-                    draggable
-                    onDragStart={(e) => e.dataTransfer.setData("id", id)}
-                  >
-                    {el.imagen && <img src={el.imagen} alt="" />}
-                    <p>{el.texto}</p>
-                  </div>
-                );
-              })}
+            <div key={zIndex} style={{ marginBottom: "10px" }}>
+              <div
+                className="dropzone"
+                onDragOver={(e) => e.preventDefault()}
+                onDrop={(e) => manejarDrop(e, i, zIndex)}
+              >
+                {zona.map((id) => {
+                  const el = preg.elementos.find((e) => e.id === id);
+                  if (!el) return null;
+                  return (
+                    <div
+                      key={id}
+                      className="preview-item"
+                      draggable
+                      onDragStart={(e) => e.dataTransfer.setData("id", id)}
+                    >
+                      {el.imagen && <img src={el.imagen} alt="" />}
+                      <p>{el.texto}</p>
+                    </div>
+                  );
+                })}
+              </div>
+              <button
+                onClick={() => eliminarZonaRespuesta(i, zIndex)}
+                style={{ backgroundColor: "#e67e22" }}
+              >
+                🗑️ Eliminar zona
+              </button>
             </div>
           ))}
+
+
           <button onClick={() => agregarZonaRespuesta(i)}>+ Añadir zona de respuesta</button>
         </div>
       ))}
