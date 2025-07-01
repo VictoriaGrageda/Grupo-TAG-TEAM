@@ -240,12 +240,12 @@ export default function EditorCuestionario() {
                 reader.onload = () => actualizarElemento(i, j, "imagen", reader.result);
                 reader.readAsDataURL(file);
               }}
-            />
-            <button onClick={() => eliminarElemento(i, el.id)} style={{ backgroundColor: "#e74c3c" }}>
-              Eliminar
-            </button>
-          </div>
-        ))}
+              />
+              <button onClick={() => eliminarElemento(i, el.id)} style={{ backgroundColor: "#e74c3c" }}>
+                Eliminar
+              </button>
+            </div>
+          ))}
          
 
           <button onClick={() => agregarElemento(i)}>+ Añadir elemento</button>
@@ -300,7 +300,13 @@ export default function EditorCuestionario() {
 
 
           <button onClick={() => agregarZonaRespuesta(i)}>+ Añadir zona de respuesta</button>
+
+          <button onClick={() => eliminarPregunta(i)} className="btn-eliminar">
+            Eliminar esta pregunta
+          </button>
+
         </div>
+        
       ))}
 
       <button onClick={agregarPregunta}>Crear nueva pregunta</button>
