@@ -68,6 +68,18 @@ export default function EditorCuestionario() {
     setPreguntas(copia);
   };
 
+  const eliminarElemento = (pregIndex, elId) => {
+  const copia = [...preguntas];
+  // Elimina el elemento con el id dado
+  copia[pregIndex].elementos = copia[pregIndex].elementos.filter((el) => el.id !== elId);
+  // También lo remueve de las zonas de respuesta si estaba usado
+  copia[pregIndex].respuestas = copia[pregIndex].respuestas.map((zona) =>
+    zona.filter((id) => id !== elId)
+  );
+  setPreguntas(copia);
+};
+
+
   const manejarDrop = (e, pregIndex, zonaIndex) => {
     e.preventDefault();
     const id = e.dataTransfer.getData("id");
@@ -100,11 +112,11 @@ export default function EditorCuestionario() {
       dificultad: p.dificultad,
       imagenEnunciado: p.imagenEnunciado,
       elementos: (p.elementos || []).map(({ texto, imagen, id }) => ({
-  texto: texto || "",
-  imagen: imagen || "",
-  id,
-  correcto: (p.respuestas || []).some((z) => z.includes(id)),
-})),
+      texto: texto || "",
+      imagen: imagen || "",
+      id,
+      correcto: (p.respuestas || []).some((z) => z.includes(id)),
+    })),
 
       ordenCorrecto: p.respuestas.flat(), // Firestore no admite arrays anidados
     })),
@@ -201,27 +213,31 @@ export default function EditorCuestionario() {
           </select>
             
 
-          {preg.elementos.map((el, j) => (
-            <div className="elemento" key={el.id}>
-              <input
-                type="text"
-                placeholder="Texto"
-                value={el.texto}
-                onChange={(e) => actualizarElemento(i, j, "texto", e.target.value)}
-              />
-              <input
-                type="file"
-                accept="image/*"
-                onChange={(e) => {
-                  const file = e.target.files[0];
-                  if (!file) return;
-                  const reader = new FileReader();
-                  reader.onload = () => actualizarElemento(i, j, "imagen", reader.result);
-                  reader.readAsDataURL(file);
-                }}
-              />
-            </div>
-          ))}
+        {preg.elementos.map((el, j) => (
+          <div className="elemento" key={el.id}>
+            <input
+              type="text"
+              placeholder="Texto"
+              value={el.texto}
+              onChange={(e) => actualizarElemento(i, j, "texto", e.target.value)}
+            />
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = () => actualizarElemento(i, j, "imagen", reader.result);
+                reader.readAsDataURL(file);
+              }}
+            />
+            <button onClick={() => eliminarElemento(i, el.id)} style={{ backgroundColor: "#e74c3c" }}>
+              Eliminar
+            </button>
+          </div>
+        ))}
+         
 
           <button onClick={() => agregarElemento(i)}>+ Añadir elemento</button>
 
