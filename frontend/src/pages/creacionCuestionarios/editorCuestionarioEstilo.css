@@ -128,3 +128,11 @@ textarea {
   }
 }
 
+button.eliminar {
+  background-color: #e74c3c;
+  color: white;
+}
+button.eliminar:hover {
+  background-color: #c0392b;
+}
+
