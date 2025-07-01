@@ -49,6 +49,13 @@ export default function EditorCuestionario() {
     setPreguntas(copia);
   };
 
+  const actualizarImagenEnunciado = (pregIndex, url) => {
+    const copia = [...preguntas];
+    copia[pregIndex].imagenEnunciado = url;
+    setPreguntas(copia);
+  };
+
+
   const agregarZonaRespuesta = (pregIndex) => {
     const copia = [...preguntas];
     copia[pregIndex].respuestas.push([]);
@@ -175,7 +182,7 @@ export default function EditorCuestionario() {
               const file = e.target.files[0];
               if (!file) return;
               const url = await subirImagen(file.name, file);
-              actualizarElemento(i, j, "imagen", url);
+              actualizarElemento(i, j, url);
             }}
           />
 
