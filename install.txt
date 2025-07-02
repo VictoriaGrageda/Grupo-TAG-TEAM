@@ -56,8 +56,6 @@ npm run dev
 El servidor estará disponible en:
 http://localhost:3000/
 
-y comando externo para ver los usuarios creados:
-npx prisma studio
 
 
 
