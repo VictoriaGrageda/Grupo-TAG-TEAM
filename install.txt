@@ -16,11 +16,11 @@ cd frontend
 2.1 Instalar dependencias y ejecutar:
 
 npm install
-npm run dev
 npm install framer-motion lucide-react
 npm install react-router-dom
 npm install lucide-react
 npm install firebase
+npm run dev
 
 La aplicación estará disponible en tu navegador en:
 http://localhost:5173/
