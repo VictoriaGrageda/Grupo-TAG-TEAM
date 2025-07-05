@@ -1,1 +1,65 @@
 
+--- Instrucciones para ejecutar el proyecto ---
+
+1. Clonar el repositorio
+
+Abra una terminal o consola de comandos y ejecute:
+
+git clone https://github.com/VictoriaGrageda/Grupo-TAG-TEAM.git
+
+2. Configuración del Frontend
+
+Desde la raíz del proyecto, ejecuta:
+
+cd frontend 
+
+2.1 Instalar dependencias y ejecutar:
+
+npm install
+npm install framer-motion lucide-react
+npm install react-router-dom
+npm install lucide-react
+npm install firebase
+npm run dev
+
+La aplicación estará disponible en tu navegador en:
+http://localhost:5173/
+
+3. Configuración del Backend
+
+3.1 Navegar al directorio del backend
+Desde la raíz del proyecto, ejecuta:
+cd backend
+
+Si ya estás en la carpeta frontend, usa: cd ../backend
+
+3.2 Crear un archivo llamado .env en la raíz de la carpeta backend y agregar el siguiente contenido:
+
+DATABASE_URL="postgresql://postgres.lorzaapxhgreljzymwhv:IwnALO7u9FixjcF1@aws-0-us-west-1.pooler.supabase.com:6543/postgres?pgbouncer=true"
+
+DIRECT_URL="postgresql://postgres.lorzaapxhgreljzymwhv:IwnALO7u9FixjcF1@aws-0-us-west-1.pooler.supabase.com:5432/postgres"
+
+CLOUDINARY_API_KEY="382549645255776"
+
+CLOUDINARY_API_SECRET="JBkLTytgMQ0Do0dqIF3s0lDOhGg"
+
+JWT_SECRET=supersecreto123
+
+3.3 Instalar dependencias y generar el cliente de Prisma:
+
+npm install
+npx prisma generate
+
+3.4 Iniciar el servidor backend:
+
+npm run dev
+El servidor estará disponible en:
+http://localhost:3000/
+
+
+
+
+
+
+
+

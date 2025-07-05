@@ -128,3 +128,16 @@ textarea {
   }
 }
 
+.btn-eliminar {
+  background-color: #c0392b;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.btn-eliminar:hover {
+  background-color: #a93226;
+}
+
+
